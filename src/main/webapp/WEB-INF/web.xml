@@ -9,4 +9,12 @@
             30
         </session-timeout>
     </session-config>
+    <servlet>
+        <servlet-name>servicejava</servlet-name>
+        <servlet-class>com.eduit.javaApi.products</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servicejava</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
 </web-app>

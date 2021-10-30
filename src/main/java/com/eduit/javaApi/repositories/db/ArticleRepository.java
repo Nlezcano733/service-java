@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.eduit.javaApi.entities.Article;
 import com.eduit.javaApi.repositories.interfaces.I_ArticleRepository;
@@ -27,7 +28,7 @@ public class ArticleRepository implements I_ArticleRepository {
 			ps.setString(1, article.getName());
 			ps.setDouble(2, article.getPrice());
 			ps.setInt(3, article.getStock());
-			ps.execute();
+			ps.execute(); // primero ejecutamos y despues, cuando la db genera el id, lo tomamos
 			
 			ResultSet rs = ps.getGeneratedKeys();
 			while(rs.next()) {
@@ -67,9 +68,13 @@ public class ArticleRepository implements I_ArticleRepository {
 	}
 
 	@Override
-	public Article getById(int id) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public Optional<Article> getById(int id) {
+		List<Article> all = this.getAll();
+		Optional<Article> result = all
+				.stream()
+				.filter(a -> a.getId() == id)
+				.findFirst();
+		return result;
 	}
-	
 	
 }
