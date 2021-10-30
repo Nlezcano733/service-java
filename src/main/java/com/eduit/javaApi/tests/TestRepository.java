@@ -9,9 +9,11 @@ public class TestRepository {
 	public static void main (String[] args) {
 		I_ArticleRepository art = new ArticleRepository(Connector.getConnection());
 		
-		art.save(new Article("Termo", 600.00, 20));
-		art.save(new Article("Lampara", 450.00, 10));
-		art.save(new Article("Conservadora", 200.00, 6));
+
+		art.save(new Article("Carpa", 600, 20));
+		art.save(new Article("Lampara", 450, 10));
+		art.save(new Article("Conservadora", 200, 6));
+
 		art.getAll().forEach(System.out::println);
 		System.out.println("Proceso terminado");
 	}

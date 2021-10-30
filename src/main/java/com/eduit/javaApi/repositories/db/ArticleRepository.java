@@ -22,14 +22,17 @@ public class ArticleRepository implements I_ArticleRepository {
 	@Override
 	public void save(Article article) {
 		if(article == null) return;
-		String statement = "insert into articles (name, price, stock) values (?, ?, ?)";
+		String statement = "insert into articles (name, price, stock) values (?, ?, ?);";
 		try (PreparedStatement ps = conn.prepareStatement(statement, PreparedStatement.RETURN_GENERATED_KEYS)){
 			ps.setString(1, article.getName());
 			ps.setDouble(2, article.getPrice());
 			ps.setInt(3, article.getStock());
+			ps.execute();
 			
 			ResultSet rs = ps.getGeneratedKeys();
-			if(rs.next()) article.setId(rs.getInt(1));
+			while(rs.next()) {
+				article.setId(rs.getInt(1));
+			}
 			
 		} catch (Exception e) {
 			System.out.println(e);

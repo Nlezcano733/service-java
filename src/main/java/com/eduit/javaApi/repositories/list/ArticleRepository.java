@@ -8,7 +8,7 @@ import com.eduit.javaApi.repositories.interfaces.I_ArticleRepository;
 
 public class ArticleRepository implements I_ArticleRepository {
 	
-	private List<Article> list = new ArrayList();
+	private List<Article> list = new ArrayList<Article>();
 
 	@Override
 	public void save(Article article) {
